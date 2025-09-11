@@ -2,7 +2,10 @@ package org.firstinspires.ftc.teamcode
 
 import com.qualcomm.robotcore.hardware.DcMotor
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 
+
+@TeleOp(name="hehe")
 class firstTeleop: LinearOpMode(){
 
     override fun runOpMode(){
@@ -16,6 +19,8 @@ class firstTeleop: LinearOpMode(){
         while(opModeIsActive()){
             if (gamepad1.a){
                 frontLeft.power = 1.0
+            } else {
+                frontLeft.power = 0.0
             }
         }
 
