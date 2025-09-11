@@ -22,6 +22,25 @@ class firstTeleop: LinearOpMode(){
             } else {
                 frontLeft.power = 0.0
             }
+
+            if (gamepad1.x){
+                frontRight.power = 1.0
+            } else {
+                frontRight.power = 0.0
+            }
+
+            if (gamepad1.b){
+                backLeft.power = 1.0
+            } else {
+                backLeft.power = 0.0
+            }
+
+            if (gamepad1.y){
+                backRight.power = 1.0
+            } else {
+                backRight.power = 0.0
+            }
+
         }
 
     }
