@@ -6,9 +6,18 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 class firstTeleop: LinearOpMode(){
 
     override fun runOpMode(){
-        val frontLeft = hardwareMap.get("frontLeft")
-        val frontRight = hardwareMap.get("frontRight")
-        val backLeft = hardwareMap.get("backLeft")
-        val backRight = hardwareMap.get("backRight")
+        val frontLeft = hardwareMap.get("frontLeft") as DcMotor
+        val frontRight = hardwareMap.get("frontRight") as DcMotor
+        val backLeft = hardwareMap.get("backLeft") as DcMotor
+        val backRight = hardwareMap.get("backRight") as DcMotor
+
+        waitForStart()
+
+        while(opModeIsActive()){
+            if (gamepad1.a){
+                frontLeft.power = 1.0
+            }
+        }
+
     }
 }
