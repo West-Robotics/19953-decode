@@ -19,14 +19,10 @@ class firstTeleop: LinearOpMode(){
         while(opModeIsActive()){
             if (gamepad1.a){
                 frontLeft.power = 1.0
-                frontRight.power = 1.0
-                backLeft.power = 1.0
-                backRight.power = 1.0
+
             } else {
                 frontLeft.power = 0.0
-                frontRight.power = 0.0
-                backLeft.power = 0.0
-                backRight.power = 0.0
+
             }
 
             if (gamepad1.x){
@@ -43,14 +39,10 @@ class firstTeleop: LinearOpMode(){
 
             if (gamepad1.y){
                 frontLeft.power = 1.0
-                frontRight.power = 1.0
-                backLeft.power = 1.0
-                backRight.power = 1.0
+                
             } else {
                 frontLeft.power = 0.0
-                frontRight.power = 0.0
-                backLeft.power = 0.0
-                backRight.power = 0.0
+
             }
 
         }
