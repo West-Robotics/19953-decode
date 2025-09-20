@@ -5,7 +5,6 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import com.qualcomm.robotcore.hardware.DcMotor
 
 @TeleOp(name="2ndTeleOp")
-
 class secondTeleop: LinearOpMode(){
 
     override fun runOpMode(){
