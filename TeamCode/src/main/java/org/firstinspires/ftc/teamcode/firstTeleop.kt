@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 
 
 @TeleOp(name="hehe")
-class firstTeleop: LinearOpMode(){
+class FirstTeleop: LinearOpMode(){
 
     override fun runOpMode(){
         val frontLeft = hardwareMap.get("frontLeft") as DcMotor
@@ -17,29 +17,12 @@ class firstTeleop: LinearOpMode(){
         waitForStart()
 
         while(opModeIsActive()){
-            if (gamepad1.a){
-                frontLeft.power = 1.0
-            } else {
-                frontLeft.power = 0.0
-            }
+            frontRight.power = -gamepad1.left_stick_y.toDouble() - gamepad1.left_stick_x.toDouble() + gamepad1.right_stick_x.toDouble()
+            frontLeft.power = -gamepad1.left_stick_y.toDouble() + gamepad1.left_stick_x.toDouble() - gamepad1.right_stick_x.toDouble()
+            backLeft.power = -gamepad1.left_stick_y.toDouble() - gamepad1.left_stick_x.toDouble() - gamepad1.right_stick_x.toDouble()
+            backRight.power = -gamepad1.left_stick_y.toDouble() + gamepad1.left_stick_x.toDouble() + gamepad1.right_stick_x.toDouble()
 
-            if (gamepad1.x){
-                frontRight.power = 1.0
-            } else {
-                frontRight.power = 0.0
-            }
 
-            if (gamepad1.b){
-                backLeft.power = 1.0
-            } else {
-                backLeft.power = 0.0
-            }
-
-            if (gamepad1.y){
-                backRight.power = 1.0
-            } else {
-                backRight.power = 0.0
-            }
 
         }
 
