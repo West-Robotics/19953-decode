@@ -4,8 +4,10 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import com.qualcomm.robotcore.hardware.DcMotor
 
+
 @TeleOp(name="2ndTeleOp")
-class secondTeleop: LinearOpMode(){
+class SecondTeleop: LinearOpMode(){
+
 
     override fun runOpMode(){
         val frontLeft = hardwareMap.get("frontLeft") as DcMotor
@@ -15,54 +17,18 @@ class secondTeleop: LinearOpMode(){
 
         waitForStart()
 
+
         while(opModeIsActive()){
-            if (gamepad1.a){
-                frontLeft.power = 1.0
-                frontRight.power = 1.0
-                backLeft.power = 1.0
-                backRight.power = 1.0
-            } else {
-                frontLeft.power = 0.0
-                frontRight.power = 0.0
-                backLeft.power = 0.0
-                backRight.power = 0.0
-            }
+            Double y = gamepad1.left_stick_y
 
-            if (gamepad1.x){
-                frontRight.power = 1.0
-                frontLeft.power = -1.0
-                backLeft.power = 1.0
-                backRight.power = 1.0
-            } else {
-                frontLeft.power = 0.0
-                frontRight.power = 0.0
-                backLeft.power = 0.0
-                backRight.power = 0.0
-            }
 
-            if (gamepad1.b){
-                backLeft.power = 1.0
-                frontRight.power = 1.0
-                backLeft.power = 1.0
-                backRight.power = -1.0
-            } else {
-                frontLeft.power = 0.0
-                frontRight.power = 0.0
-                backLeft.power = 0.0
-                backRight.power = 0.0
-            }
+            frontLeft.power = 
+            backLeft.power
+            frontRight.power
+            backRight.power
 
-            if (gamepad1.y){
-                frontLeft.power = -1.0
-                frontRight.power = -1.0
-                backLeft.power = -1.0
-                backRight.power = -1.0
-            } else {
-                frontLeft.power = 0.0
-                frontRight.power = 0.0
-                backLeft.power = 0.0
-                backRight.power = 0.0
-            }
+
+
 
         }
 
