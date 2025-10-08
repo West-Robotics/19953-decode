@@ -19,6 +19,8 @@ class SecondTeleop: LinearOpMode(){
 
 
         while(opModeIsActive()){
+
+            
             Double y = gamepad1.left_stick_y
 
 
