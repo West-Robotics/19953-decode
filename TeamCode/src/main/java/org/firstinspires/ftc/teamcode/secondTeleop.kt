@@ -26,10 +26,10 @@ class SecondTeleop: LinearOpMode(){
             val y =-gamepad1.left_stick_y.toDouble()
 
             while(opModeIsActive()){
-                frontRight.power = -y - x + gamepad1.right_stick_x.toDouble()
-                frontLeft.power = -y + gamepad1.left_stick_x.toDouble() - gamepad1.right_stick_x.toDouble()
-                backLeft.power = -gamepad1.left_stick_y.toDouble() - gamepad1.left_stick_x.toDouble() - gamepad1.right_stick_x.toDouble()
-                backRight.power = -gamepad1.left_stick_y.toDouble() + gamepad1.left_stick_x.toDouble() + gamepad1.right_stick_x.toDouble()
+                frontRight.power =  y - x + gamepad1.right_stick_x.toDouble()
+                frontLeft.power =  y + x -gamepad1.right_stick_x.toDouble()
+                backLeft.power =  y - x - gamepad1.right_stick_x.toDouble()
+                backRight.power =  y + x + gamepad1.right_stick_x.toDouble()
 
 
 
