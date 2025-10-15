@@ -23,6 +23,7 @@ class SecondTeleop: LinearOpMode(){
 
 
             val x = gamepad1.left_stick_x.toDouble() * 1.1
+        
             val y =-gamepad1.left_stick_y.toDouble()
 
             while(opModeIsActive()){
