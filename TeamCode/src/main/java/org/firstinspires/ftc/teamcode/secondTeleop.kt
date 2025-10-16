@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import com.qualcomm.robotcore.hardware.DcMotor
 
 
-@TeleOp(name="2ndTeleOp")
+@TeleOp(name="PushBot")
 class SecondTeleop: LinearOpMode(){
 
 
@@ -23,15 +23,14 @@ class SecondTeleop: LinearOpMode(){
 
 
             val x = gamepad1.left_stick_x.toDouble() * 1.1
-        
+            val rx = gamepad1.right_stick_x.toDouble()
             val y =-gamepad1.left_stick_y.toDouble()
 
             while(opModeIsActive()){
-                frontRight.power =  y - x + gamepad1.right_stick_x.toDouble()
-                frontLeft.power =  y + x -gamepad1.right_stick_x.toDouble()
-                backLeft.power =  y - x - gamepad1.right_stick_x.toDouble()
-                backRight.power =  y + x + gamepad1.right_stick_x.toDouble()
-
+                frontRight.power =  y - x + rx
+                frontLeft.power =  y + x - rx
+                backLeft.power =  y - x - rx
+                backRight.power =  y + x + rx 
 
 
 
