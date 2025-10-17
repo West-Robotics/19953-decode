@@ -6,10 +6,10 @@ import com.qualcomm.robotcore.hardware.DcMotor
 
 
 @TeleOp(name="PushBot")
-class SecondTeleop: LinearOpMode(){
+class SecondTeleop: LinearOpMode() {
 
 
-    override fun runOpMode(){
+    override fun runOpMode() {
         val frontLeft = hardwareMap.get("frontLeft") as DcMotor
         val frontRight = hardwareMap.get("frontRight") as DcMotor
         val backLeft = hardwareMap.get("backLeft") as DcMotor
@@ -18,23 +18,20 @@ class SecondTeleop: LinearOpMode(){
         waitForStart()
 
 
-        while(opModeIsActive()){
-        }
+
+        val x = gamepad1.left_stick_x.toDouble() * 1.1
+        val rx = gamepad1.right_stick_x.toDouble()
+        val y =-gamepad1.left_stick_y.toDouble()
 
 
-            val x = gamepad1.left_stick_x.toDouble() * 1.1
-            val rx = gamepad1.right_stick_x.toDouble()
-            val y =-gamepad1.left_stick_y.toDouble()
-
-            while(opModeIsActive()){
+            while (opModeIsActive()) {
                 frontRight.power =  y - x + rx
                 frontLeft.power =  y + x - rx
                 backLeft.power =  y - x - rx
-                backRight.power =  y + x + rx 
-
+                backRight.power =  y + x + rx
 
 
             }
 
-    }
-}
+
+}}
