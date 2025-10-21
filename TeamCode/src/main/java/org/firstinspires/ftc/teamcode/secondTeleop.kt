@@ -19,7 +19,7 @@ class SecondTeleop: LinearOpMode(){
 
 
         while(opModeIsActive()){
-        }
+
 
 
             val x = gamepad1.left_stick_x.toDouble() * 1.1
@@ -37,4 +37,4 @@ class SecondTeleop: LinearOpMode(){
             }
 
     }
-}
+}}
