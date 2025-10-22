@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import com.qualcomm.robotcore.hardware.DcMotorSimple
 
 
-@TeleOp(name="hehe")
+@TeleOp(name="ActualBot")
 class FirstTeleop: LinearOpMode() {
 
 
