@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import com.qualcomm.robotcore.hardware.DcMotorSimple
 
 
-@TeleOp(name="ActualBot")
+@TeleOp(name="PushBot")
 class FirstTeleop: LinearOpMode() {
 
 
