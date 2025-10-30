@@ -48,12 +48,12 @@ class SecondTeleop: LinearOpMode() {
 
 
                 backRight.direction = DcMotorSimple.Direction.FORWARD
-                backLeft.direction = DcMotorSimple.Direction.REVERSE
-                frontRight.direction = DcMotorSimple.Direction.REVERSE
-                frontLeft.direction = DcMotorSimple.Direction.FORWARD
+                backLeft.direction = DcMotorSimple.Direction.FORWARD
+                frontRight.direction = DcMotorSimple.Direction.FORWARD
+                frontLeft.direction = DcMotorSimple.Direction.REVERSE
                 flyWheel0.direction = DcMotorSimple.Direction.FORWARD
-                flyWheel1.direction = DcMotorSimple.Direction.REVERSE
-                throngler.direction = DcMotorSimple.Direction.FORWARD
+                flyWheel1.direction = DcMotorSimple.Direction.FORWARD
+                throngler.direction = DcMotorSimple.Direction.REVERSE
 
 
 
@@ -70,9 +70,9 @@ class SecondTeleop: LinearOpMode() {
                     currentGamepad1.copy(gamepad1)
                     currentGamepad2.copy(gamepad2)
 
-                    val x = gamepad1.left_stick_x.toDouble() * 1.1
-                    val rx = gamepad1.right_stick_x.toDouble()
-                    val y = -gamepad1.left_stick_y.toDouble()
+                    val x = gamepad1.left_stick_x.toDouble() * 1.1 //
+                    val y = gamepad1.right_stick_x.toDouble() //y //rx
+                    val rx = gamepad1.left_stick_y.toDouble()  //rx //y
                     val v = gamepad1.left_bumper
                     val vv = previousGamepad1.left_bumper
                     val t = gamepad1.right_bumper
@@ -107,7 +107,7 @@ class SecondTeleop: LinearOpMode() {
 
 
                     if (togglethrongler) {
-                        throngler.power = 0.5
+                        throngler.power = 1.toDouble()
                     }
                     else {
                         throngler.power = 0.toDouble()
