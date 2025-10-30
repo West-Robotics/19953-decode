@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.Gamepad
 
 
 
-@TeleOp(name="ActualBot")
+@TeleOp(name="(Not)ActualBotv1")
 class SecondTeleop: LinearOpMode() {
 
 
