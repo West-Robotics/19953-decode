@@ -39,7 +39,7 @@ class praygeTeleop: LinearOpMode() {
         throngler.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
 
         backRight.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
-        backLeft.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
+        backLeft.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE // reversed phisically
         frontRight.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
         frontLeft.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
         flyWheel0.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.FLOAT
