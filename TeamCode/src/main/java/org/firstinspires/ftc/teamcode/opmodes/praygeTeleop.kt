@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.Gamepad
 
 
 @TeleOp(name="ActualBotv2")
-class praygeTeleop: LinearOpMode() {
+class PraygeTeleop: LinearOpMode() {
 
 
     override fun runOpMode() {

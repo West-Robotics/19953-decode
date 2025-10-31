@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode
+package org.firstinspires.ftc.teamcode.opmodes
 
 import com.qualcomm.robotcore.hardware.DcMotor
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
@@ -6,11 +6,20 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import com.qualcomm.robotcore.hardware.DcMotorSimple
 import com.qualcomm.robotcore.hardware.Gamepad
 
+
 @TeleOp(name="TestBotTime")
-class testTeleop: LinearOpMode() {
+class TestTeleop: LinearOpMode() {
 
 
     override fun runOpMode() {
+
+
+        val currentGamepad1 = Gamepad()
+        val currentGamepad2 = Gamepad()
+
+        val previousGamepad1 = Gamepad()
+        val previousGamepad2 = Gamepad()
+
         val frontLeft = hardwareMap.get("frontLeft") as DcMotor
         val frontRight = hardwareMap.get("frontRight") as DcMotor
         val backLeft = hardwareMap.get("backLeft") as DcMotor
@@ -20,6 +29,7 @@ class testTeleop: LinearOpMode() {
         val throngler = hardwareMap.get("throngler") as DcMotor
         var togglethrongler = false
         var toggleflywheels = false
+
 
         backRight.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
         backLeft.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
@@ -50,16 +60,13 @@ class testTeleop: LinearOpMode() {
 
         while (opModeIsActive()) {
 
-            previousGamepad1.copy(gamepad = currentGamepad1)
-            previousGamepad2.copy(gamepad = currentGamepad2)
+            previousGamepad1.copy(currentGamepad1)
+            previousGamepad2.copy(currentGamepad2)
 
-            currentGamepad1.copy(gamepad = gamepad1)
-            currentGamepad2.copy(gamepad = gamepad2)
+            currentGamepad1.copy(gamepad1)
+            currentGamepad2.copy(gamepad2)
 
 
-            val x = gamepad1.left_stick_x.toDouble() * 1.1
-            val rx = gamepad1.right_stick_x.toDouble()
-            val y = -gamepad1.left_stick_y.toDouble()
             val v = gamepad1.left_bumper
             val vv = previousGamepad1.left_bumper
             val t = gamepad1.right_bumper
@@ -67,10 +74,21 @@ class testTeleop: LinearOpMode() {
 
 
             while(opModeIsActive()){
-                frontRight.power =  y - x + rx
-                frontLeft.power =  y + x - rx
-                backLeft.power =  y - x - rx
-                backRight.power =  y + x + rx
+                frontRight.power =  -gamepad1.left_stick_y.toDouble() - (gamepad1.left_stick_x.toDouble() * 1.1) + gamepad1.right_stick_x.toDouble()
+                frontLeft.power =  -gamepad1.left_stick_y.toDouble() + gamepad1.left_stick_x.toDouble() * 1.1 - gamepad1.right_stick_x.toDouble()
+                backLeft.power =  -gamepad1.left_stick_y.toDouble() - gamepad1.left_stick_x.toDouble() * 1.1 - gamepad1.right_stick_x.toDouble()
+                backRight.power =  -gamepad1.left_stick_y.toDouble() + gamepad1.left_stick_x.toDouble() * 1.1 + gamepad1.right_stick_x.toDouble()
+
+
+                if (t && !tt) {
+
+                    togglethrongler = !togglethrongler
+                }
+
+                if (gamepad1.left_bumper && !vv) {
+
+                    toggleflywheels = !toggleflywheels
+                }
 
 
                 if (toggleflywheels) {
