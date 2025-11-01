@@ -3,8 +3,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import com.qualcomm.robotcore.hardware.DcMotor
 import com.qualcomm.robotcore.hardware.DcMotorSimple
 import com.qualcomm.robotcore.hardware.Gamepad
-
-
+import org.firstinspires.ftc.teamcode.subsystems.Drivetrain
 
 
 @TeleOp(name="ActualBotv2")
@@ -12,6 +11,7 @@ class PraygeTeleop: LinearOpMode() {
 
 
     override fun runOpMode() {
+        val drivetrain = Drivetrain(hardwareMap)
 
         val currentGamepad1 = Gamepad()
         val currentGamepad2 = Gamepad()
@@ -39,7 +39,7 @@ class PraygeTeleop: LinearOpMode() {
         throngler.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
 
         backRight.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
-        backLeft.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE // reversed phisically
+        backLeft.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE // reversed physically
         frontRight.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
         frontLeft.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
         flyWheel0.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.FLOAT

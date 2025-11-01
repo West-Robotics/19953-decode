@@ -1,21 +1,18 @@
 package org.firstinspires.ftc.teamcode.subsystems
+//import com.qualcomm.robotcore.hardware.external.Telemetry
 import com.qualcomm.robotcore.hardware.DcMotor
 import com.qualcomm.robotcore.hardware.DcMotorSimple
 import com.qualcomm.robotcore.hardware.HardwareMap
-//import com.qualcomm.robotcore.hardware.external.Telemetry
-//import com.qualcomm.robotcore.hardware.robertMkII.hardware.NgMotor
-import java.util.Locale
-
 
 
 class Drivetrain(hardwareMap: HardwareMap) {
 
-    private val frontLeft =
-    private val frontRight = (DcMotor)(hardwareMap.get("frontRight") as DcMotor, DcMotorSimple.Direction.FORWARD, DcMotor.ZeroPowerBehavior.BRAKE, DcMotor.RunMode.RUN_WITHOUT_ENCODER)
-    private val backLeft = (DcMotor)(hardwareMap.get("backLeft") as DcMotor, DcMotorSimple.Direction.REVERSE, DcMotor.ZeroPowerBehavior.BRAKE, DcMotor.RunMode.RUN_WITHOUT_ENCODER)
-    private val backRight = (DcMotor)(hardwareMap.get("backRight") as DcMotor, DcMotorSimple.Direction.FORWARD, DcMotor.ZeroPowerBehavior.BRAKE, DcMotor.RunMode.RUN_WITHOUT_ENCODER)
+    private val frontLeft = ScMotor(hardwareMap, ("frontLeft"), DcMotorSimple.Direction.REVERSE, DcMotor.ZeroPowerBehavior.BRAKE)
+    private val frontRight = ScMotor(hardwareMap, ("frontRight"), DcMotorSimple.Direction.FORWARD, DcMotor.ZeroPowerBehavior.BRAKE)
+    private val backLeft = ScMotor(hardwareMap, ("backLeft"), DcMotorSimple.Direction.REVERSE, DcMotor.ZeroPowerBehavior.BRAKE)
+    private val backRight = ScMotor(hardwareMap, ("backRight"), DcMotorSimple.Direction.FORWARD, DcMotor.ZeroPowerBehavior.BRAKE)
 
-    fun setSpeed(x: Double, y:Double, turn: Double) {
+    fun setSpeed(x: Double, y: Double, turn: Double) {
         frontLeft.effort = y - x + turn
         frontRight.effort = y + x - turn
         backLeft.effort = y + x + turn

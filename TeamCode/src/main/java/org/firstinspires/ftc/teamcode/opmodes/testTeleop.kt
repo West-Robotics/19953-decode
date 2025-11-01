@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import com.qualcomm.robotcore.hardware.DcMotorSimple
 import com.qualcomm.robotcore.hardware.Gamepad
+import org.firstinspires.ftc.teamcode.subsystems.Drivetrain
 
 
 @TeleOp(name="TestBotTime")
@@ -12,7 +13,7 @@ class TestTeleop: LinearOpMode() {
 
 
     override fun runOpMode() {
-
+        val drivetrain = Drivetrain(hardwareMap)
 
         val currentGamepad1 = Gamepad()
         val currentGamepad2 = Gamepad()
@@ -67,10 +68,7 @@ class TestTeleop: LinearOpMode() {
             currentGamepad2.copy(gamepad2)
 
 
-            val v = gamepad1.left_bumper
-            val vv = previousGamepad1.left_bumper
-            val t = gamepad1.right_bumper
-            val tt = previousGamepad1.right_bumper
+
 
 
             while(opModeIsActive()){
@@ -80,12 +78,12 @@ class TestTeleop: LinearOpMode() {
                 backRight.power =  -gamepad1.left_stick_y.toDouble() + gamepad1.left_stick_x.toDouble() * 1.1 + gamepad1.right_stick_x.toDouble()
 
 
-                if (t && !tt) {
+                if (gamepad1.right_bumper && !previousGamepad1.right_bumper) {
 
                     togglethrongler = !togglethrongler
                 }
 
-                if (gamepad1.left_bumper && !vv) {
+                if (gamepad1.left_bumper && !previousGamepad1.left_bumper) {
 
                     toggleflywheels = !toggleflywheels
                 }
