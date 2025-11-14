@@ -3,6 +3,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import com.qualcomm.robotcore.hardware.DcMotor
 import com.qualcomm.robotcore.hardware.DcMotorSimple
 import com.qualcomm.robotcore.hardware.Gamepad
+import com.qualcomm.robotcore.hardware.Servo
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain
 
 
@@ -11,7 +12,7 @@ class PraygeTeleop: LinearOpMode() {
 
 
     override fun runOpMode() {
-        val drivetrain = Drivetrain(hardwareMap)
+
 
         val currentGamepad1 = Gamepad()
         val currentGamepad2 = Gamepad()
@@ -27,8 +28,10 @@ class PraygeTeleop: LinearOpMode() {
         val flyWheel0 = hardwareMap.get("flyWheel0") as DcMotor
         val flyWheel1 = hardwareMap.get("flyWheel1") as DcMotor
         val throngler = hardwareMap.get("throngler") as DcMotor
+        val claw = hardwareMap.get("throngler") as Servo
         var togglethrongler = false
         var toggleflywheels = false
+        var toggleclaw = false
 
         backRight.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
         backLeft.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
@@ -37,6 +40,7 @@ class PraygeTeleop: LinearOpMode() {
         flyWheel0.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
         flyWheel1.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
         throngler.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
+        claw.position = 1.0
 
         backRight.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
         backLeft.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE // reversed physically
@@ -54,6 +58,7 @@ class PraygeTeleop: LinearOpMode() {
         flyWheel0.direction = DcMotorSimple.Direction.FORWARD
         flyWheel1.direction = DcMotorSimple.Direction.FORWARD
         throngler.direction = DcMotorSimple.Direction.REVERSE
+        claw.direction = Servo.Direction.FORWARD // CHECK PHYSICAL DIRECTION
 
 
 
@@ -77,6 +82,8 @@ class PraygeTeleop: LinearOpMode() {
             val vv = previousGamepad1.left_bumper
             val t = gamepad1.right_bumper
             val tt = previousGamepad1.right_bumper
+            val cminus = gamepad1.right_trigger
+            val cplus = gamepad1.left_trigger
 
 
             if (t && !tt) {
@@ -90,10 +97,13 @@ class PraygeTeleop: LinearOpMode() {
             }
 
 
+
             frontRight.power =  y - x + rx
             frontLeft.power =  y + x - rx
             backLeft.power =  y - x - rx
             backRight.power =  y + x + rx
+
+            if ()
 
 
             if (toggleflywheels) {

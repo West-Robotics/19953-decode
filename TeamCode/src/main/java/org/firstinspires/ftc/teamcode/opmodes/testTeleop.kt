@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import com.qualcomm.robotcore.hardware.DcMotorSimple
 import com.qualcomm.robotcore.hardware.Gamepad
+import com.qualcomm.robotcore.hardware.HardwareMap
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain
 
 
@@ -13,7 +14,6 @@ class TestTeleop: LinearOpMode() {
 
 
     override fun runOpMode() {
-        val drivetrain = Drivetrain(hardwareMap)
 
         val currentGamepad1 = Gamepad()
         val currentGamepad2 = Gamepad()
@@ -21,8 +21,8 @@ class TestTeleop: LinearOpMode() {
         val previousGamepad1 = Gamepad()
         val previousGamepad2 = Gamepad()
 
-        val frontLeft = hardwareMap.get("frontLeft") as DcMotor
-        val frontRight = hardwareMap.get("frontRight") as DcMotor
+        val frontLeft = (Drivetrain(hardwareMap,"frontLeft"))
+        val frontRight = (Drivetrain("frontRight"))
         val backLeft = hardwareMap.get("backLeft") as DcMotor
         val backRight = hardwareMap.get("backRight") as DcMotor
         val flyWheel0 = hardwareMap.get("flyWheel0") as DcMotor
@@ -34,16 +34,12 @@ class TestTeleop: LinearOpMode() {
 
         backRight.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
         backLeft.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
-        frontRight.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
-        frontLeft.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
         flyWheel0.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
         flyWheel1.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
         throngler.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
 
         backRight.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
         backLeft.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
-        frontRight.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
-        frontLeft.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
         flyWheel0.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.FLOAT
         flyWheel1.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.FLOAT
         throngler.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.FLOAT
@@ -51,8 +47,6 @@ class TestTeleop: LinearOpMode() {
 
         backRight.direction = DcMotorSimple.Direction.REVERSE
         backLeft.direction = DcMotorSimple.Direction.FORWARD
-        frontRight.direction = DcMotorSimple.Direction.REVERSE
-        frontLeft.direction = DcMotorSimple.Direction.FORWARD
         flyWheel0.direction = DcMotorSimple.Direction.FORWARD
         flyWheel1.direction = DcMotorSimple.Direction.FORWARD
         throngler.direction = DcMotorSimple.Direction.REVERSE
@@ -72,8 +66,6 @@ class TestTeleop: LinearOpMode() {
 
 
             while(opModeIsActive()){
-                frontRight.power =  -gamepad1.left_stick_y.toDouble() - (gamepad1.left_stick_x.toDouble() * 1.1) + gamepad1.right_stick_x.toDouble()
-                frontLeft.power =  -gamepad1.left_stick_y.toDouble() + gamepad1.left_stick_x.toDouble() * 1.1 - gamepad1.right_stick_x.toDouble()
                 backLeft.power =  -gamepad1.left_stick_y.toDouble() - gamepad1.left_stick_x.toDouble() * 1.1 - gamepad1.right_stick_x.toDouble()
                 backRight.power =  -gamepad1.left_stick_y.toDouble() + gamepad1.left_stick_x.toDouble() * 1.1 + gamepad1.right_stick_x.toDouble()
 
@@ -90,20 +82,20 @@ class TestTeleop: LinearOpMode() {
 
 
                 if (toggleflywheels) {
-                    flyWheel0.power = 1.toDouble()
-                    flyWheel1.power = (-1).toDouble()
+                    flyWheel0.power = 1.0
+                    flyWheel1.power = -1.0
                 }
                 else {
-                    flyWheel0.power = 0.toDouble()
-                    flyWheel1.power = 0.toDouble()
+                    flyWheel0.power = 0.0
+                    flyWheel1.power = 0.0
                 }
 
 
                 if (togglethrongler) {
-                    throngler.power = 1.toDouble()
+                    throngler.power = 1.0
                 }
                 else {
-                    throngler.power = 0.toDouble()
+                    throngler.power = 0.0
                 }
 
 
@@ -113,4 +105,6 @@ class TestTeleop: LinearOpMode() {
 
         }
     }
+
+
 }
