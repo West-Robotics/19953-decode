@@ -3,9 +3,9 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import com.qualcomm.robotcore.hardware.DcMotor
 import com.qualcomm.robotcore.hardware.DcMotorSimple
 import com.qualcomm.robotcore.hardware.Gamepad
+import com.qualcomm.robotcore.hardware.HardwareMap
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain
-import kotlin.math.abs
-import kotlin.math.max
+import org.firstinspires.ftc.teamcode.subsystems.ScMotor
 
 
 @TeleOp(name="thelastonefr")
@@ -15,13 +15,17 @@ class SecondTeleop: LinearOpMode() {
             val currentGamepad2 = Gamepad()
             val previousGamepad1 = Gamepad()
             val previousGamepad2 = Gamepad()
-            val driveTrain = Drivetrain()
+            val driveTrain = Drivetrain(hardwareMap)
 
             val flyWheel0 = hardwareMap.get("flyWheel0") as DcMotor
             val flyWheel1 = hardwareMap.get("flyWheel1") as DcMotor
             val throngler = hardwareMap.get("throngler") as DcMotor
-            var togglethrongler = false
+            //var togglethrongler = false
             var toggleflywheels = false
+            val frontLeft = driveTrain
+            val frontRight = driveTrain
+            val backLeft = driveTrain
+            val backRight = driveTrain
 
 
             flyWheel0.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
@@ -46,19 +50,21 @@ class SecondTeleop: LinearOpMode() {
                 currentGamepad1.copy(gamepad1)
                 currentGamepad2.copy(gamepad2)
 
-                driveTrain.write
-                driveTrain.setSpeed
-
-                val y = -gamepad1.left_stick_y.toDouble() // Remember, Y stick value is reversed
-                val x = gamepad1.left_stick_x * 1.1 // Counteract imperfect strafing
-                val rx = gamepad1.right_stick_x.toDouble()
+                frontLeft.write
+                frontLeft.setSpeed
+                frontRight.write
+                frontRight.setSpeed
+                backLeft.write
+                backLeft.setSpeed
+                backRight.write
+                backRight.setSpeed
 
                 val v = gamepad1.left_bumper
                 val vv = previousGamepad1.left_bumper
-                val t = gamepad1.right_bumper
-                val tt = previousGamepad1.right_bumper
-                val bl = gamepad1.right_trigger
-                val br = gamepad1.left_trigger
+                //val t = gamepad1.right_bumper
+               //val tt = previousGamepad1.right_bumper
+                //val bl = gamepad1.right_trigger
+                //val br = gamepad1.left_trigger
 
                 val leftTrigger = gamepad1.left_trigger
                 val rightTrigger = gamepad1.right_trigger
