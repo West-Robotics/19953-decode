@@ -5,7 +5,6 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import com.qualcomm.robotcore.hardware.DcMotorSimple
 import com.qualcomm.robotcore.hardware.Gamepad
-import com.qualcomm.robotcore.hardware.HardwareMap
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain
 
 
@@ -22,7 +21,7 @@ class TestTeleop: LinearOpMode() {
         val previousGamepad2 = Gamepad()
 
         val frontLeft = (Drivetrain(hardwareMap,"frontLeft"))
-        val frontRight = (Drivetrain("frontRight"))
+        val frontRight = (Drivetrain())
         val backLeft = hardwareMap.get("backLeft") as DcMotor
         val backRight = hardwareMap.get("backRight") as DcMotor
         val flyWheel0 = hardwareMap.get("flyWheel0") as DcMotor

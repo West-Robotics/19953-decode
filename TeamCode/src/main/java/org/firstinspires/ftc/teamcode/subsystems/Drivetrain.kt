@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode.subsystems
 //import com.qualcomm.robotcore.hardware.external.Telemetry
 import com.qualcomm.robotcore.hardware.DcMotor
 import com.qualcomm.robotcore.hardware.DcMotorSimple
-import com.qualcomm.robotcore.hardware.Gamepad
 import com.qualcomm.robotcore.hardware.HardwareMap
 import kotlin.math.abs
 import kotlin.math.max
