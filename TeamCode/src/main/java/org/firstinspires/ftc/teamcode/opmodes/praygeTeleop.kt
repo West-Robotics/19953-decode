@@ -28,10 +28,11 @@ class PraygeTeleop: LinearOpMode() {
         val flyWheel0 = hardwareMap.get("flyWheel0") as DcMotor
         val flyWheel1 = hardwareMap.get("flyWheel1") as DcMotor
         val throngler = hardwareMap.get("throngler") as DcMotor
-        val claw = hardwareMap.get("throngler") as Servo
+        //val claw1 = hardwareMap.get("claw") as DcMotor
+        //val claw = hardwareMap.get("throngler") as Servo
         var togglethrongler = false
         var toggleflywheels = false
-        var toggleclaw = false
+        //var toggleclaw = false
 
         backRight.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
         backLeft.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
@@ -40,7 +41,8 @@ class PraygeTeleop: LinearOpMode() {
         flyWheel0.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
         flyWheel1.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
         throngler.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
-        claw.position = 1.0
+        //claw1.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
+        //claw.position = 1.0
 
         backRight.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
         backLeft.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE // reversed physically
@@ -48,86 +50,65 @@ class PraygeTeleop: LinearOpMode() {
         frontLeft.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
         flyWheel0.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.FLOAT
         flyWheel1.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.FLOAT
-        throngler.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.FLOAT
+        throngler.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
+        //claw1.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.FLOAT
 
 
-        backRight.direction = DcMotorSimple.Direction.FORWARD
+        backRight.direction = DcMotorSimple.Direction.REVERSE
         backLeft.direction = DcMotorSimple.Direction.FORWARD
-        frontRight.direction = DcMotorSimple.Direction.FORWARD
-        frontLeft.direction = DcMotorSimple.Direction.REVERSE
+        frontRight.direction = DcMotorSimple.Direction.REVERSE
+        frontLeft.direction = DcMotorSimple.Direction.FORWARD
         flyWheel0.direction = DcMotorSimple.Direction.FORWARD
         flyWheel1.direction = DcMotorSimple.Direction.FORWARD
         throngler.direction = DcMotorSimple.Direction.REVERSE
-        claw.direction = Servo.Direction.FORWARD // CHECK PHYSICAL DIRECTION
+        //claw1.direction = DcMotorSimple.Direction.REVERSE
+        //claw.direction = Servo.Direction.FORWARD // CHECK PHYSICAL DIRECTION
 
 
 
         waitForStart()
 
+            while (opModeIsActive()) {
 
+                previousGamepad1.copy(currentGamepad1)
+                previousGamepad2.copy(currentGamepad2)
 
-        while (opModeIsActive()) {
+                currentGamepad1.copy(gamepad1)
+                currentGamepad2.copy(gamepad2)
 
+                val x = gamepad1.left_stick_x.toDouble() * 1.1 //
+                val y = gamepad1.right_stick_x.toDouble() //y //rx
+                val rx = gamepad1.left_stick_y.toDouble()  //rx //y
+                val v = gamepad1.left_bumper
+                val vv = previousGamepad1.left_bumper
+                val t = gamepad1.right_bumper
+                val tt = previousGamepad1.right_bumper
+                val bl = gamepad1.right_trigger
+                val br = gamepad1.left_trigger
 
-            previousGamepad1.copy(currentGamepad1)
-            previousGamepad2.copy(currentGamepad2)
+                val leftTrigger = gamepad1.left_trigger
+                val rightTrigger = gamepad1.right_trigger
 
-            currentGamepad1.copy(gamepad1)
-            currentGamepad2.copy(gamepad2)
+                when {
+                    rightTrigger > 0.1 -> throngler.power = 1.0
+                    leftTrigger > 0.1  -> throngler.power = -1.0
+                    else               -> throngler.power = 0.0
+                }
 
-            val x = gamepad1.left_stick_x.toDouble() * 1.1 //
-            val y = gamepad1.right_stick_x.toDouble() //y //rx
-            val rx = gamepad1.left_stick_y.toDouble()  //rx //y
-            val v = gamepad1.left_bumper
-            val vv = previousGamepad1.left_bumper
-            val t = gamepad1.right_bumper
-            val tt = previousGamepad1.right_bumper
-            val cminus = gamepad1.right_trigger
-            val cplus = gamepad1.left_trigger
+                frontRight.power = y - x + rx
+                frontLeft.power = y + x - rx
+                backLeft.power = y - x - rx
+                backRight.power = y + x + rx
 
+                if (v && !vv) {
+                    toggleflywheels = !toggleflywheels
+                }
 
-            if (t && !tt) {
-
-                togglethrongler = !togglethrongler
-            }
-
-            if (v && !vv) {
-
-                toggleflywheels = !toggleflywheels
-            }
-
-
-
-            frontRight.power =  y - x + rx
-            frontLeft.power =  y + x - rx
-            backLeft.power =  y - x - rx
-            backRight.power =  y + x + rx
-
-            if ()
-
-
-            if (toggleflywheels) {
-                flyWheel0.power = 1.toDouble()
-                flyWheel1.power = (-1).toDouble()
-            }
-            else {
-                flyWheel0.power = 0.toDouble()
-                flyWheel1.power = 0.toDouble()
-            }
-
-
-            if (togglethrongler) {
-                throngler.power = 1.toDouble()
-            }
-            else {
-                throngler.power = 0.toDouble()
-            }
-
-
-
-
-
-
-        }
-    }
-}
+                if (toggleflywheels) {
+                    flyWheel0.power = 1.0
+                    flyWheel1.power = -1.0
+                } else {
+                    flyWheel0.power = 0.0
+                    flyWheel1.power = 0.0
+                }
+            }}}
