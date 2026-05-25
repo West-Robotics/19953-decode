@@ -20,8 +20,8 @@ class TestTeleop: LinearOpMode() {
         val previousGamepad1 = Gamepad()
         val previousGamepad2 = Gamepad()
 
-        val frontLeft = (Drivetrain(hardwareMap,"frontLeft"))
-        val frontRight = (Drivetrain())
+        val frontLeft = hardwareMap.get("frontLeft") as DcMotor
+        val frontRight = hardwareMap.get("frontRight") as DcMotor
         val backLeft = hardwareMap.get("backLeft") as DcMotor
         val backRight = hardwareMap.get("backRight") as DcMotor
         val flyWheel0 = hardwareMap.get("flyWheel0") as DcMotor

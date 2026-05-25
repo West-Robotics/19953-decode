@@ -6,20 +6,24 @@ import com.qualcomm.robotcore.hardware.Gamepad
 import com.qualcomm.robotcore.hardware.HardwareMap
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain
 import org.firstinspires.ftc.teamcode.subsystems.ScMotor
+import com.qualcomm.robotcore.hardware.Servo
+
 
 
 @TeleOp(name="thelastonefr")
-class SecondTeleop: LinearOpMode() {
+class this1maybe: LinearOpMode() {
         override fun runOpMode() {
             val currentGamepad1 = Gamepad()
             val currentGamepad2 = Gamepad()
             val previousGamepad1 = Gamepad()
             val previousGamepad2 = Gamepad()
             val driveTrain = Drivetrain(hardwareMap)
+            val armServo = hardwareMap.get(Servo::class.java, "armServo")
+
 
             val flyWheel0 = hardwareMap.get("flyWheel0") as DcMotor
             val flyWheel1 = hardwareMap.get("flyWheel1") as DcMotor
-            val throngler = hardwareMap.get("throngler") as DcMotor
+            //val throngler = hardwareMap.get("throngler") as DcMotor
             //var togglethrongler = false
             var toggleflywheels = false
             val frontLeft = driveTrain
@@ -27,18 +31,21 @@ class SecondTeleop: LinearOpMode() {
             val backLeft = driveTrain
             val backRight = driveTrain
 
+            var servoPos = 0.7
+            armServo.position = servoPos
+
 
             flyWheel0.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
             flyWheel1.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
-            throngler.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
+            //throngler.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
 
             flyWheel0.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
             flyWheel1.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
-            throngler.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
+            //throngler.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
 
             flyWheel0.direction = DcMotorSimple.Direction.FORWARD
             flyWheel1.direction = DcMotorSimple.Direction.FORWARD
-            throngler.direction = DcMotorSimple.Direction.REVERSE
+            //throngler.direction = DcMotorSimple.Direction.REVERSE
 
             waitForStart()
 
@@ -61,19 +68,30 @@ class SecondTeleop: LinearOpMode() {
 
                 val v = gamepad1.left_bumper
                 val vv = previousGamepad1.left_bumper
-                //val t = gamepad1.right_bumper
-               //val tt = previousGamepad1.right_bumper
-                //val bl = gamepad1.right_trigger
-                //val br = gamepad1.left_trigger
+                val t = gamepad1.right_bumper
+                val tt = previousGamepad1.right_bumper
+                val bl = gamepad1.right_trigger
+                val br = gamepad1.left_trigger
+
+                if (gamepad1.a) {
+                    servoPos = 0.7
+                }
+
+                if (gamepad1.b) {
+                    servoPos = 0.25
+                }
+
+                armServo.direction = Servo.Direction.FORWARD
+                armServo.position = servoPos
 
                 val leftTrigger = gamepad1.left_trigger
                 val rightTrigger = gamepad1.right_trigger
 
-                when {
-                    leftTrigger > 0.1 -> throngler.power = .3
-                    rightTrigger > 0.1  -> throngler.power = -.3
-                    else               -> throngler.power = 0.0
-                }
+                //when {
+                    //leftTrigger > 0.1 -> throngler.power = .3
+                    //rightTrigger > 0.1  -> throngler.power = -.3
+                    //else               -> throngler.power = 0.0
+                //}
 
 
                 if (v && !vv) {
