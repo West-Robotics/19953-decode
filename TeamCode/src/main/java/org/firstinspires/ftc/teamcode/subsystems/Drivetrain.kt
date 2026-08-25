@@ -6,7 +6,9 @@ import com.qualcomm.robotcore.hardware.HardwareMap
 import kotlin.math.abs
 import kotlin.math.max
 
-class Drivetrain(hardwareMap: HardwareMap) {
+    class Drivetrain(hardwareMap: HardwareMap) {
+
+
 
     // Index order: 0 = topRight, 1 = bottomRight, 2 = bottomLeft, 3 = topLeft
     private val motors = arrayOf(
