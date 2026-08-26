@@ -9,7 +9,6 @@ import kotlin.math.max
     class Drivetrain(hardwareMap: HardwareMap) {
 
 
-
     // Index order: 0 = topRight, 1 = bottomRight, 2 = bottomLeft, 3 = topLeft
     private val motors = arrayOf(
         ScMotor(hardwareMap, "topRight", DcMotorSimple.Direction.FORWARD, DcMotor.ZeroPowerBehavior.BRAKE), // 0: topRight
