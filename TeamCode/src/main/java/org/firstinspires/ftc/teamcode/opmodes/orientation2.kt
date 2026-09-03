@@ -121,6 +121,7 @@ class orientation2: LinearOpMode() {
         }
 
         waitForStart()
+        moveForward() 
 
 
     }

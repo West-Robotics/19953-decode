@@ -16,6 +16,10 @@ class drivetrain: LinearOpMode() {
         val previousGamepad1 = Gamepad()
         val previousGamepad2 = Gamepad()
         val driveTrain = Drivetrain(hardwareMap)
+        val servo = hardwareMap.get(Servo::class.java,"servo")
+
+        var servoPosition = .5
+        servo.position = servoPosition
 
         waitForStart()
 
@@ -39,6 +43,14 @@ class drivetrain: LinearOpMode() {
             val tt = previousGamepad1.right_bumper
             val bl = gamepad1.right_trigger
             val br = gamepad1.left_trigger
+
+            if (Gamepad1.a) {
+                servoPosition = 0.0
+            }
+
+            while (currentGamepad1.b) {
+                servoPosition = 1.0
+            }
 
         }
     }
