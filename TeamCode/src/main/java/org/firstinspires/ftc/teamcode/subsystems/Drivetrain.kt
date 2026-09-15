@@ -1,33 +1,24 @@
 package org.firstinspires.ftc.teamcode.subsystems
-
 import com.qualcomm.robotcore.hardware.DcMotor
 import com.qualcomm.robotcore.hardware.DcMotorSimple
 import com.qualcomm.robotcore.hardware.HardwareMap
 import kotlin.math.abs
 import kotlin.math.max
-
     class Drivetrain(hardwareMap: HardwareMap) {
-
-
-    // Index order: 0 = topRight, 1 = bottomRight, 2 = bottomLeft, 3 = topLeft
-    private val motors = arrayOf(
-        ScMotor(hardwareMap, "topRight", DcMotorSimple.Direction.FORWARD, DcMotor.ZeroPowerBehavior.BRAKE), // 0: topRight
-        ScMotor(hardwareMap, "bottomRight", DcMotorSimple.Direction.FORWARD, DcMotor.ZeroPowerBehavior.BRAKE),  // 1: bottomRight
-        ScMotor(hardwareMap, "bottomLeft", DcMotorSimple.Direction.REVERSE, DcMotor.ZeroPowerBehavior.BRAKE),   // 2: bottomLeft
-        ScMotor(hardwareMap, "topLeft", DcMotorSimple.Direction.REVERSE, DcMotor.ZeroPowerBehavior.BRAKE)   // 3: topLeft
-    )
-
+        val frontRight = ScMotor(hardwareMap, "frontRight", DcMotorSimple.Direction.FORWARD, DcMotor.ZeroPowerBehavior.BRAKE)
+        val frontLeft = ScMotor(hardwareMap, "frontLeft", DcMotorSimple.Direction.REVERSE, DcMotor.ZeroPowerBehavior.BRAKE)
+        val backRight = ScMotor(hardwareMap, "backRight", DcMotorSimple.Direction.FORWARD, DcMotor.ZeroPowerBehavior.BRAKE)
+        val backLeft = ScMotor(hardwareMap, "backLeft", DcMotorSimple.Direction.REVERSE, DcMotor.ZeroPowerBehavior.BRAKE)
     fun setSpeed(x: Double, y: Double, turn: Double) {
         val denominator = max(abs(y) + abs(x) + abs(turn), 1.0)
-        motors[0].effort = (y - x - turn) / denominator // topRight   (right side: -turn)
-        motors[1].effort = (y + x - turn) / denominator // bottomRight (right side: -turn)
-        motors[2].effort = (y - x + turn) / denominator // bottomLeft  (left side: +turn)
-        motors[3].effort = (y + x + turn) / denominator // topLeft    (left side: +turn)
+        frontRight.effort = (y - x - turn) / denominator // (right side: -turn)
+        frontLeft.effort = (y + x + turn) / denominator // (left side: +turn)
+        backRight.effort = (y + x - turn) / denominator // (right side: -turn)
+        backLeft.effort = (y - x + turn) / denominator // (left side: +turn)
     }
-
     fun write() {
-        for (motor in motors) {
-            motor.write()
-        }
-    }
-}
+        frontRight.write()
+        frontLeft.write()
+        backRight.write()
+        backLeft.write()
+    } }
