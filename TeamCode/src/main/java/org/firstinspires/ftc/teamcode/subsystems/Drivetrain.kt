@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple
 import com.qualcomm.robotcore.hardware.HardwareMap
 import kotlin.math.abs
 import kotlin.math.max
-    class Drivetrain(hardwareMap: HardwareMap) { // this is not what most drivetrains look like this one can because of the ScMotor class
+    class Drivetrain(hardwareMap: HardwareMap) { // pulls the ScMotor class to shorten this
         val frontRight = ScMotor(hardwareMap, "frontRight", DcMotorSimple.Direction.FORWARD, DcMotor.ZeroPowerBehavior.BRAKE)
         val frontLeft = ScMotor(hardwareMap, "frontLeft", DcMotorSimple.Direction.REVERSE, DcMotor.ZeroPowerBehavior.BRAKE)
         val backRight = ScMotor(hardwareMap, "backRight", DcMotorSimple.Direction.FORWARD, DcMotor.ZeroPowerBehavior.BRAKE)
