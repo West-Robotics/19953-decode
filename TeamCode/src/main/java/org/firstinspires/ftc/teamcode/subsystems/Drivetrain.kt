@@ -11,10 +11,10 @@ import kotlin.math.max
         val backLeft = ScMotor(hardwareMap, "backLeft", DcMotorSimple.Direction.REVERSE, DcMotor.ZeroPowerBehavior.BRAKE)
     fun setSpeed(x: Double, y: Double, turn: Double) { //driving math
         val denominator = max(abs(y) + abs(x) + abs(turn), 1.0)
-        frontRight.effort = (y - x - turn) / denominator // (right side: -turn)
-        frontLeft.effort = (y + x + turn) / denominator // (left side: +turn)
-        backRight.effort = (y + x - turn) / denominator // (right side: -turn)
-        backLeft.effort = (y - x + turn) / denominator // (left side: +turn)
+        frontRight.effort = (y - x - turn) / denominator // check gm0 drivetrain to get more indepth about this
+        frontLeft.effort = (y + x + turn) / denominator
+        backRight.effort = (y + x - turn) / denominator
+        backLeft.effort = (y - x + turn) / denominator
     }
     fun write() { // speeds stuff up
         frontRight.write()
