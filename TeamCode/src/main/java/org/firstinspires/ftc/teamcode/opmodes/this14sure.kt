@@ -9,23 +9,33 @@ import org.firstinspires.ftc.teamcode.subsystems.Drivetrain
 @TeleOp(name="this14sure")
 class this14sure: LinearOpMode() {
     override fun runOpMode() {
-//        val currentGamepad1 = Gamepad() //used to check if a button was pressed
-//        val currentGamepad2 = Gamepad()
-//        val previousGamepad1 = Gamepad()
-//        val previousGamepad2 = Gamepad()
+        val currentGamepad1 = Gamepad() //used to check if a button was pressed
+        val currentGamepad2 = Gamepad()
+        val previousGamepad1 = Gamepad()
+        val previousGamepad2 = Gamepad()
         val driveTrain = Drivetrain(hardwareMap) //pulls drivetrain subsystem
+        val intake = hardwareMap.get("intake") as DcMotor
+        intake.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
+        intake.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.FLOAT
+        intake.direction = DcMotorSimple.Direction.FORWARD
         waitForStart()
         while (opModeIsActive()) {
-//            previousGamepad1.copy(currentGamepad1) //used to check if a button was pressed
-//            previousGamepad2.copy(currentGamepad2)
-//            currentGamepad1.copy(gamepad1)
-//            currentGamepad2.copy(gamepad2)
+            previousGamepad1.copy(currentGamepad1) //used to check if a button was pressed
+            previousGamepad2.copy(currentGamepad2)
+            currentGamepad1.copy(gamepad1)
+            currentGamepad2.copy(gamepad2)
             // Drive: left stick = strafe/forward, right stick x = turn
             val x = gamepad1.left_stick_x.toDouble() // driving controls
             val y = -gamepad1.left_stick_y.toDouble() * 1.1 // *1.1 counteracts imperfect strafing stick is inverted (up = negative)
             val turn = gamepad1.right_stick_x.toDouble()
             driveTrain.setSpeed(x, y, turn)
             driveTrain.write()
+
+            if(currentGamepad1.right_bumper){
+                intake.power = 1.0
+            } else {
+                intake.power = 0.0
+            }
         }
     }
 }
