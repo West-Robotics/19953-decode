@@ -44,7 +44,7 @@ class drivetrain: LinearOpMode() {
             val bl = gamepad1.right_trigger
             val br = gamepad1.left_trigger
 
-            if (Gamepad1.a) {
+            if (gamepad1.a) {
                 servoPosition = 0.0
             }
 
