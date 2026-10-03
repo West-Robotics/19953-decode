@@ -26,6 +26,7 @@ class Autonomous: LinearOpMode() {
             motor.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
         }
 
+
         fun power(effort: Double) {
             for (motor in motors) {
                 motor.power = effort
