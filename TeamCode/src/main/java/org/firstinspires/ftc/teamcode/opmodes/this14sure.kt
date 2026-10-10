@@ -17,7 +17,7 @@ class this14sure: LinearOpMode() {
         val intake = hardwareMap.get("intake") as DcMotor
         intake.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
         intake.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.FLOAT
-        intake.direction = DcMotorSimple.Direction.FORWARD
+        intake.direction = DcMotorSimple.Direction.REVERSE
         waitForStart()
         while (opModeIsActive()) {
             previousGamepad1.copy(currentGamepad1) //used to check if a button was pressed
