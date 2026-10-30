@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.opmodes
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
+import com.qualcomm.robotcore.hardware.CRServo
 import com.qualcomm.robotcore.hardware.DcMotor
 import com.qualcomm.robotcore.hardware.DcMotorSimple
 import com.qualcomm.robotcore.hardware.Gamepad
@@ -17,8 +18,10 @@ class this14sure: LinearOpMode() {
         val intake = hardwareMap.get("intake") as DcMotor
         val flywheel1 = hardwareMap.get("flywheel1") as DcMotor
         val flywheel2 = hardwareMap.get("flywheel2") as DcMotor
-        val servo = hardwareMap.get("servo") as Servo
-        var servotoggle = true
+        val servo2 = hardwareMap.get("servo2") as CRServo
+        var servo2toggle = false
+        val servo1 = hardwareMap.get("servo1") as Servo
+        var servo1toggle = false
         intake.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
         intake.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.FLOAT
         intake.direction = DcMotorSimple.Direction.FORWARD
@@ -41,11 +44,13 @@ class this14sure: LinearOpMode() {
             driveTrain.setSpeed(x, y, turn)
             driveTrain.write()
 
+
             if(currentGamepad1.right_bumper){
                 intake.power = 1.0
             } else {
                 intake.power = 0.0
             }
+
 
             if(currentGamepad1.left_bumper){
                 flywheel1.power = 1.0
@@ -55,14 +60,25 @@ class this14sure: LinearOpMode() {
                 flywheel2.power = 0.0
             }
 
-            if(currentGamepad1.a){
-             servotoggle = !servotoggle
+
+            if(currentGamepad1.a && previousGamepad1.a){
+                servo2toggle = !servo2toggle
             }
-            if (servotoggle == true) {
-                servo.position = 0.7
+            if (servo2toggle == true) {
+                servo2.power = 1.0
             }else{
-                servo.position = 0.6
+                servo2.power = 0.0
+            }
+            servo1.position = .6
+            if(currentGamepad1.b && previousGamepad1.b){
+                servo1toggle = !servo1toggle
+            }
+            if (servo1toggle == true) {
+                servo1.position = 0.7
+            }else {
+                servo1.position = 0.6
             }
         }
     }
 }
+
