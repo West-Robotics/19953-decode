@@ -15,9 +15,19 @@ class this14sure: LinearOpMode() {
         val previousGamepad2 = Gamepad()
         val driveTrain = Drivetrain(hardwareMap) //pulls drivetrain subsystem
         val intake = hardwareMap.get("intake") as DcMotor
+        val flywheel1 = hardwareMap.get("flywheel1") as DcMotor
+        val flywheel2 = hardwareMap.get("flywheel2") as DcMotor
+        val servo = hardwareMap.get("servo") as Servo
+        var servotoggle = true
         intake.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
         intake.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.FLOAT
-        intake.direction = DcMotorSimple.Direction.REVERSE
+        intake.direction = DcMotorSimple.Direction.FORWARD
+        flywheel1.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
+        flywheel1.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.FLOAT
+        flywheel1.direction = DcMotorSimple.Direction.REVERSE
+        flywheel2.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
+        flywheel2.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.FLOAT
+        flywheel2.direction = DcMotorSimple.Direction.FORWARD
         waitForStart()
         while (opModeIsActive()) {
             previousGamepad1.copy(currentGamepad1) //used to check if a button was pressed
@@ -35,6 +45,23 @@ class this14sure: LinearOpMode() {
                 intake.power = 1.0
             } else {
                 intake.power = 0.0
+            }
+
+            if(currentGamepad1.left_bumper){
+                flywheel1.power = 1.0
+                flywheel2.power = 1.0
+            }else{
+                flywheel1.power = 0.0
+                flywheel2.power = 0.0
+            }
+
+            if(currentGamepad1.a){
+             servotoggle = !servotoggle
+            }
+            if (servotoggle == true) {
+                servo.position = 0.7
+            }else{
+                servo.position = 0.6
             }
         }
     }
