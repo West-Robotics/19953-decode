@@ -16,12 +16,15 @@ class this14sure: LinearOpMode() {
         val previousGamepad2 = Gamepad()
         val driveTrain = Drivetrain(hardwareMap) //pulls drivetrain subsystem
         val intake = hardwareMap.get("intake") as DcMotor
+        var intaketoggle = false
         val flywheel1 = hardwareMap.get("flywheel1") as DcMotor
         val flywheel2 = hardwareMap.get("flywheel2") as DcMotor
+        var flywheeltoggle = false
         val servo2 = hardwareMap.get("servo2") as CRServo
         var servo2toggle = false
         val servo1 = hardwareMap.get("servo1") as Servo
         var servo1toggle = false
+        servo1.position = 0.0
         intake.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
         intake.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.FLOAT
         intake.direction = DcMotorSimple.Direction.FORWARD
@@ -30,7 +33,7 @@ class this14sure: LinearOpMode() {
         flywheel1.direction = DcMotorSimple.Direction.REVERSE
         flywheel2.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
         flywheel2.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.FLOAT
-        flywheel2.direction = DcMotorSimple.Direction.FORWARD
+        flywheel2.direction = DcMotorSimple.Direction.REVERSE
         waitForStart()
         while (opModeIsActive()) {
             previousGamepad1.copy(currentGamepad1) //used to check if a button was pressed
@@ -43,16 +46,22 @@ class this14sure: LinearOpMode() {
             val turn = gamepad1.right_stick_x.toDouble()
             driveTrain.setSpeed(x, y, turn)
             driveTrain.write()
+            if(currentGamepad1.right_trigger > 0 && !(previousGamepad1.right_trigger > 0))
+                intaketoggle = !intaketoggle
 
-
-            if(currentGamepad1.right_bumper){
+            if(intaketoggle) {
                 intake.power = 1.0
-            } else {
+            }else if(currentGamepad1.a) {
+                intake.power = -0.5
+
+            }else{
                 intake.power = 0.0
             }
 
-
-            if(currentGamepad1.left_bumper){
+            if(currentGamepad1.left_trigger > 0 && !(previousGamepad1.left_trigger > 0)){
+                flywheeltoggle = !flywheeltoggle
+            }
+            if(flywheeltoggle){
                 flywheel1.power = 1.0
                 flywheel2.power = 1.0
             }else{
@@ -60,25 +69,22 @@ class this14sure: LinearOpMode() {
                 flywheel2.power = 0.0
             }
 
-
-            if(currentGamepad1.a && previousGamepad1.a){
+            if(currentGamepad1.left_bumper && !previousGamepad1.left_bumper){
                 servo2toggle = !servo2toggle
             }
-            if (servo2toggle == true) {
+            if (servo2toggle) {
                 servo2.power = 1.0
             }else{
                 servo2.power = 0.0
             }
-            servo1.position = .6
-            if(currentGamepad1.b && previousGamepad1.b){
+            if(currentGamepad1.right_bumper && !previousGamepad1.right_bumper){
                 servo1toggle = !servo1toggle
             }
-            if (servo1toggle == true) {
-                servo1.position = 0.7
-            }else {
-                servo1.position = 0.6
+            if(servo1toggle) {
+                servo1.position = 0.4
+            }else{
+                servo1.position = 0.25
             }
         }
     }
 }
-
