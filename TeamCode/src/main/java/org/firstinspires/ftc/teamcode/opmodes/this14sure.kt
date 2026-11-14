@@ -24,6 +24,8 @@ class this14sure: LinearOpMode() {
         var servo2toggle = false
         val servo1 = hardwareMap.get("servo1") as Servo
         var servo1toggle = false
+        var intake_power = 0.0
+        var powertoggle = false
         servo1.position = 0.0
         intake.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
         intake.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.FLOAT
@@ -56,6 +58,26 @@ class this14sure: LinearOpMode() {
 
             }else{
                 intake.power = 0.0
+            }
+
+
+
+            if(currentGamepad1.y && !previousGamepad1.y) {
+                powertoggle = !powertoggle
+                intake_power = intake_power+0.1
+            }
+            if (currentGamepad1.x){
+                intake_power = 0.0
+            }
+            if (powertoggle){
+                flywheel1.power = intake_power
+                flywheel2.power = intake_power
+                telemetry.addData("power", flywheel2.power)
+                telemetry.addData("backright",flywheel1.power)
+                telemetry.update()
+            } else{
+                flywheel1.power = 0.0
+                flywheel2.power = 0.0
             }
 
             if(currentGamepad1.left_trigger > 0 && !(previousGamepad1.left_trigger > 0)){
