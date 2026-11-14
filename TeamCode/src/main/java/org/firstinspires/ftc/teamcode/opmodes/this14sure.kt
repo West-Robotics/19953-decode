@@ -32,10 +32,10 @@ class this14sure: LinearOpMode() {
         intake.direction = DcMotorSimple.Direction.FORWARD
         flywheel1.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
         flywheel1.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.FLOAT
-        flywheel1.direction = DcMotorSimple.Direction.REVERSE
+        flywheel1.direction = DcMotorSimple.Direction.FORWARD
         flywheel2.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
         flywheel2.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.FLOAT
-        flywheel2.direction = DcMotorSimple.Direction.REVERSE
+        flywheel2.direction = DcMotorSimple.Direction.FORWARD
         waitForStart()
         while (opModeIsActive()) {
             previousGamepad1.copy(currentGamepad1) //used to check if a button was pressed
