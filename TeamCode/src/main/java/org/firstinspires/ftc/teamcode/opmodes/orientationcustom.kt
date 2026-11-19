@@ -113,7 +113,6 @@ class Autonomous: LinearOpMode() {
         waitForStart()
         //write code here commands are moveForward(), moveBackward(), moveLeft(), and moveRight()
         // example moveForward(1000)
-        //1150 is about one tile
 
         moveForward(1000)
     }
