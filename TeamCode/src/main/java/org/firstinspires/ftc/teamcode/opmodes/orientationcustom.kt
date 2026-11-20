@@ -113,7 +113,10 @@ class Autonomous: LinearOpMode() {
         waitForStart()
         //write code here commands are moveForward(), moveBackward(), moveLeft(), and moveRight()
         // example moveForward(1000)
+        // 505 ticks per ft estimate
 
-        moveForward(1000)
+        moveForward(505)
+        moveLeft(3000)
+        moveBackward(300 )
     }
 }
